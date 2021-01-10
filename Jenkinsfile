@@ -1,11 +1,11 @@
 pipeline{
     agent any
-    
+
     stages{
         stage("test"){
             steps{
-                echo "========executing A========"
-                sh 'mvn --version'
+                echo "compiling and packaging"
+                sh 'mvn clean package'
             }
             post{
                 always{
