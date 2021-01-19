@@ -8,7 +8,7 @@ pipeline{
                 sh 'mvn clean package'
             }
             
-        },
+        }
         stage('Deploy WAR') {
             steps([$class: 'BapSshPromotionPublisherPlugin']) {
                 sshPublisher(
