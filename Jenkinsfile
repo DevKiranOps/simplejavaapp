@@ -19,7 +19,8 @@ pipeline{
                             verbose: true,
                             transfers: [
                                 sshTransfer(execCommand: "echo 'Hello World' "),
-                                sshTransfer(sourceFiles: "**/*.war",)
+                                sshTransfer(sourceFiles: "**/*.war"),
+                                sshTransfer(removePrefix: "target")
                             ]
                         )
                     ]
@@ -27,15 +28,5 @@ pipeline{
            }
         }
     }
-    // post{
-    //     always{
-    //         echo "========always========"
-    //     }
-    //     success{
-    //         echo "========pipeline executed successfully ========"
-    //     }
-    //     failure{
-    //         echo "========pipeline execution failed========"
-    //     }
-    // }
+ 
 }
