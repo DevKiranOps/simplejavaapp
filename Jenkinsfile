@@ -17,13 +17,17 @@ pipeline{
                         sshPublisherDesc(
                             configName: "web1",
                             verbose: true,
-                            transfers: [
-                                sshTransfer(execCommand: "echo 'Hello World' "),
-                                sshTransfer(removePrefix: "target"),
-                                sshTransfer(sourceFiles: "**/*.war",),
+                            transferSet {
+                                sourceFiles('**/*.war')
+                                removePrefix('target')
+                            }
+                            // transfers: [
+                            //     sshTransfer(execCommand: "echo 'Hello World' "),
+                            //     sshTransfer(removePrefix: "target"),
+                            //     sshTransfer(sourceFiles: "**/*.war",),
                                 
                                 
-                            ]
+                            // ]
                         )
                     ]
                 )
