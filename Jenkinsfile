@@ -19,7 +19,7 @@ pipeline{
                             verbose: true,
                             transfers: [
                                 sshTransfer(execCommand: "echo 'Hello World' "),
-                                sshTransfer(sourceFiles: "**/*.war",)
+                                sshTransfer(sourceFiles: "**/*.war",),
                                 sshTransfer(removePrefix: "target")
                                 
                             ]
