@@ -16,18 +16,14 @@ pipeline{
                     publishers: [
                         sshPublisherDesc(
                             configName: "web1",
-                            verbose: true,
-                            transferSet {
-                                sourceFiles('**/*.war')
-                                removePrefix('target')
-                            }
-                            // transfers: [
-                            //     sshTransfer(execCommand: "echo 'Hello World' "),
-                            //     sshTransfer(removePrefix: "target"),
-                            //     sshTransfer(sourceFiles: "**/*.war",),
+                            verbose: true,                            
+                            transfers: [
+                                sshTransfer(execCommand: "echo 'Hello World' "),
+                                sshTransfer(removePrefix: "target"),
+                                sshTransfer(sourceFiles: "**/*.war",),
                                 
                                 
-                            // ]
+                            ]
                         )
                     ]
                 )
