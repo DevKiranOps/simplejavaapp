@@ -18,9 +18,8 @@ pipeline{
                             configName: "web1",
                             verbose: true,                            
                             transfers: [
-                                sshTransfer(execCommand: "echo 'Hello World' "),
-                                sshTransfer(removePrefix: "target"),
-                                sshTransfer(sourceFiles: "**/*.war",),
+                                sshTransfer(execCommand: "echo 'Hello World' "),                                
+                                sshTransfer(sourceFiles: "**/*.war",)
                                 
                                 
                             ]
