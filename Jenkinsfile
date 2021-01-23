@@ -18,9 +18,9 @@ pipeline{
                             configName: "web1",
                             verbose: true,                            
                             transfers: [
-                                sshTransfer(execCommand: "echo 'Hello World' "),                                
-                                sshTransfer(sourceFiles: "**/*.war",)
-                                
+                                                               
+                                sshTransfer(sourceFiles: "**/*.war",),
+                                sshTransfer(execCommand: "sudo cp /home/azadmin/target/petclinin.war /opt/tomcat/webapps ")
                                 
                             ]
                         )
