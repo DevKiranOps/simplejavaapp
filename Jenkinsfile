@@ -19,8 +19,8 @@ pipeline{
                             verbose: true,                            
                             transfers: [
                                                                
-                                sshTransfer(sourceFiles: "**/*.war",),
-                                sshTransfer(execCommand: "sudo cp /home/azadmin/target/*.war /opt/tomcat/webapps ")
+                                sshTransfer(sourceFiles: "**/*.war", removePrefix: "target"),
+                                sshTransfer(execCommand: "sudo cp /home/azadmin/*.war /opt/tomcat/webapps ")
                                 
                             ]
                         )   
