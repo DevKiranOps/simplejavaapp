@@ -20,10 +20,10 @@ pipeline{
                             transfers: [
                                                                
                                 sshTransfer(sourceFiles: "**/*.war",),
-                                sshTransfer(execCommand: "sudo cp /home/azadmin/target/petclinin.war /opt/tomcat/webapps ")
+                                sshTransfer(execCommand: "sudo cp /home/azadmin/target/*.war /opt/tomcat/webapps ")
                                 
                             ]
-                        )
+                        )   
                     ]
                 )
            }
