@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     stages{
-        stage("test"){
+        stage("Build"){
             steps{
                 echo "compiling and packaging"
                 sh 'mvn clean package'
