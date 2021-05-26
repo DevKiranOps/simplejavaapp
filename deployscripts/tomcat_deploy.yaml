@@ -7,16 +7,16 @@
   remote_user: '{{ user }}'
 
   tasks:
-  - name: copy war file to web servers 
+  - name: copy war file to web servers
     copy: 
       src: '{{ warFilePath }}'
-      dest: /opt/tomcat/webapps
-    notifier: restart tomcat
+      dest: "/opt/tomcat/webapps"
+  #   notifier: restart tomcat
   
-  handlers:
-    - name: restart tomcat
-      service:
-        name: tomcat
-        state: restarted
+  # handlers:
+  #   - name: restart tomcat
+  #     service:
+  #       name: tomcat
+  #       state: restarted
 
   
