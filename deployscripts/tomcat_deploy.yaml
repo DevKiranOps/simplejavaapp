@@ -11,12 +11,4 @@
     copy: 
       src: '{{ warFilePath }}'
       dest: /opt/tomcat/webapps/petclinic.war    
-    notifier: restart tomcat
-  
-  handlers:
-    - name: restart tomcat
-      service:
-        name: tomcat
-        state: restarted
-
-  
+    
