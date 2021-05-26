@@ -10,7 +10,11 @@
   - name: copy war file to web servers
     copy: 
       src: '{{ warFilePath }}'
-      dest: "/opt/tomcat/webapps"
+      dest: /opt/tomcat/webapps/petclinic.war    
+  - name: copy war file to web servers
+    copy: 
+      src: '{{ warFilePath }}'
+      dest: "/home/azadmin"    
   #   notifier: restart tomcat
   
   # handlers:
