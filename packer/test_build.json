@@ -1,0 +1,30 @@
+{
+  "builders": [{
+    "type": "azure-arm",
+    
+    "subscription_id": "8d4847a9-69e0-421a-a34c-bdbe015475c7",
+    "use_azure_cli_auth":   true,
+
+    "managed_image_resource_group_name": "Packer",
+    "managed_image_name": "rhelTest",
+
+    "os_type": "Linux",
+    "image_publisher": "RedHat",
+    "image_offer": "RHEL",
+    "image_sku": "8.1",
+
+    "azure_tags": {
+        "dept": "Engineering",
+        "task": "Image deployment"
+    },
+
+    "location": "East US",
+    "vm_size": "Standard_B2s"
+  }],
+  "provisioners": [{
+    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+    "script": "./setup.sh",    
+    "type": "shell"
+  }]
+}
+
