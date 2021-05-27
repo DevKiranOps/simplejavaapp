@@ -1,0 +1,64 @@
+trigger: 
+  - main
+  - feature*
+variables:
+  - name: AZSUBSCRIPTION  
+    value: AZDOManaged
+  - name: action
+    value: nobuild
+  - name: devdeploy
+    value: true     
+stages: 
+  - stage: AppBuild 
+    condition:  always()
+    jobs:
+    - job: BuildWar    
+      workspace:
+        clean: all
+      pool:
+        name: CloudopsPool
+      steps:    
+      - task: Bash@3
+        inputs:
+          targetType: 'filePath'
+          filePath: deployscripts/buildJob.sh
+        env:
+          buildNumber: $(Build.BuildNumber)
+          buildDir: $(Pipeline.Workspace) 
+      - task: CopyFiles@2
+        displayName: 'Copy Files to artifact directory'
+        inputs:
+          SourceFolder: '$(System.DefaultWorkingDirectory)'
+          Contents: '**/target/*.?(war|jar)'
+          TargetFolder: $(Build.ArtifactStagingDirectory)
+      - upload: $(Build.ArtifactStagingDirectory)
+        artifact: petclinic
+    
+  - stage: deployToDev
+    condition: and(succeeded(), eq(variables.devdeploy, true))      
+    pool:
+      name: CloudopsPool  
+    jobs: 
+      - deployment: VMDeploy
+        displayName: DevWebDeploy
+        environment:
+          name: CloudOpsDev
+          resourceType: VirtualMachine
+          tags: web,dev
+        strategy:
+          runOnce:            
+            preDeploy:
+              steps:
+              - download: current
+                artifact: petclinic
+              - script: echo "Starting Deployment"
+            deploy:
+              steps:
+              - task: Bash@3
+                inputs:
+                  targetType: 'inline'
+                  script: |
+                   # Modify deployment script based on the app type
+                    echo "Starting deployment script "
+                    sudo cp $(Pipeline.Workspace)/petclinic/target/*.war /opt/tomcat/webapps/petclinic.war 
+
